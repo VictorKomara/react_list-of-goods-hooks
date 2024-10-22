@@ -25,6 +25,7 @@ interface Good {
 enum SortBy {
   abc = 'abc',
   length = 'length',
+  initial = '',
 }
 
 function getReorderedGoods(
@@ -50,7 +51,7 @@ function getReorderedGoods(
 }
 
 export const App: React.FC = () => {
-  const [sortField, setSortField] = useState<string>('');
+  const [sortField, setSortField] = useState<string>(SortBy.initial);
   const [reversed, setReversed] = useState<boolean>(false);
   const visibleGoods = getReorderedGoods(goodsFromServer, sortField, reversed);
 
@@ -92,7 +93,7 @@ export const App: React.FC = () => {
             type="button"
             className="button is-danger is-light"
             onClick={() => {
-              setSortField('');
+              setSortField(SortBy.initial);
               setReversed(false);
             }}
           >
