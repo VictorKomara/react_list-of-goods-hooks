@@ -22,8 +22,10 @@ interface Good {
   name: string;
 }
 
-const SORT_BY_ABC = 'abc';
-const SORT_BY_LENGTH = 'length';
+enum SortBy {
+  abc = 'abc',
+  length = 'length',
+}
 
 function getReorderedGoods(
   goods: Good[],
@@ -32,11 +34,11 @@ function getReorderedGoods(
 ) {
   const visibleGoods = [...goods];
 
-  if (sortType === SORT_BY_LENGTH) {
+  if (sortType === SortBy.length) {
     visibleGoods.sort((good1, good2) => good1.name.length - good2.name.length);
   }
 
-  if (sortType === SORT_BY_ABC) {
+  if (sortType === SortBy.abc) {
     visibleGoods.sort((good1, good2) => good1.name.localeCompare(good2.name));
   }
 
@@ -58,9 +60,9 @@ export const App: React.FC = () => {
         <button
           type="button"
           className={cn('button', 'is-info', {
-            'is-light': sortField !== SORT_BY_ABC,
+            'is-light': sortField !== SortBy.abc,
           })}
-          onClick={() => setSortField(SORT_BY_ABC)}
+          onClick={() => setSortField(SortBy.abc)}
         >
           Sort alphabetically
         </button>
@@ -68,9 +70,9 @@ export const App: React.FC = () => {
         <button
           type="button"
           className={cn('button', 'is-success', {
-            'is-light': sortField !== SORT_BY_LENGTH,
+            'is-light': sortField !== SortBy.length,
           })}
-          onClick={() => setSortField(SORT_BY_LENGTH)}
+          onClick={() => setSortField(SortBy.length)}
         >
           Sort by length
         </button>
